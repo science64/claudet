@@ -1,0 +1,53 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "manifest_version": 3,
+  "name": "TalktoAI: Voice input for AI Chat platforms (Claude, Gemini, ChatGPT, Perplexity and more)",
+    "description": "TalktoAI: Voice input for AI Chat platforms (Claude, Gemini, ChatGPT, Perplexity and more)",
+    "version": "0.2.2",
+    "permissions": [ "storage"],
+    "host_permissions": ["https://api.groq.com/*", "https://aistudio.google.com/*", "https://www.perplexity.ai/*"],
+     "background": {
+        "service_worker": "background.js",
+        "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://claude.ai/*"],
+      "js": ["content.js"]
+    },
+    {
+      "matches": ["https://aistudio.google.com/*", "https://www.perplexity.ai/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    },
+    "default_title": "TalktoAI: Voice input for AI Chat platforms"
+  },
+  "options_page": "options.html",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["icon16.png", "icon48.png", "icon128.png"],
+      "matches": [
+        "https://*.claude.ai/*",
+        "https://*.aistudio.google.com/*",
+        "https://*.perplexity.ai/*"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "minimum_chrome_version": "92"
+}
